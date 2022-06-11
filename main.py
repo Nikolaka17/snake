@@ -1,5 +1,6 @@
 import pygame
 from sys import exit
+from snake import Snake
 
 class Window:
     def __init__(self, width, height):
@@ -19,5 +20,5 @@ class Window:
             self.clock.tick(self.fps)
 
 if __name__ == '__main__':
-    window = Window(1280, 720)
-    window.run()
+    game = Window(1280, 720)
+    game.run()
