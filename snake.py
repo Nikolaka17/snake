@@ -6,10 +6,8 @@ class Snake:
         self.heading = heading #string containing the direction of the snake in form of a letter (N, S, E, W)
         self.length = len(self.body) + 1 #length of the snake
     
-    def move(self, ate_food):
+    def move(self, food_pos):
         self.body.insert(0, self.head)
-        if not ate_food:
-            self.body.pop(-1)
         match self.heading:
             case 'N': 
                 self.head = (self.head[0], self.head[1] - 1)
@@ -19,10 +17,16 @@ class Snake:
                 self.head = (self.head[0] + 1, self.head[1])
             case 'W':
                 self.head = (self.head[0] - 1, self.head[1])
+        if not self.head == food_pos:
+            self.body.pop(-1)
+            if self.head in self.body or self.head[0] < 0 or self.head[0] > 19 or self.head[1] < 0 or self.head[1] > 19:
+                return "H"
+            return
+        return 'A'
     
     def turn(self, direction):
         if self.heading == direction:
-            return 0
+            return
         match direction:
             case 'N': 
                 self.heading = 'N'
@@ -32,4 +36,3 @@ class Snake:
                 self.heading = 'E'
             case 'W':
                 self.heading = 'W'
-        return 1
