@@ -4,6 +4,7 @@ class Snake:
         self.head = head_pos #tuple of cordinates containing the position of the head
         self.body = [x for x in body_pos] #list of tuples containing the positions of the body pieces
         self.heading = heading #string containing the direction of the snake in form of a letter (N, S, E, W)
+        self.length = len(self.body) + 1 #length of the snake
     
     def move(self, ate_food):
         self.body.insert(0, self.head)
@@ -21,7 +22,7 @@ class Snake:
     
     def turn(self, direction):
         if self.heading == direction:
-            return
+            return 0
         match direction:
             case 'N': 
                 self.heading = 'N'
@@ -31,3 +32,4 @@ class Snake:
                 self.heading = 'E'
             case 'W':
                 self.heading = 'W'
+        return 1

@@ -1,6 +1,7 @@
 import pygame
 from sys import exit
 from snake import Snake
+from apple import Apple
 
 class Window:
     def __init__(self, width, height):
