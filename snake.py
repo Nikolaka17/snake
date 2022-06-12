@@ -21,7 +21,7 @@ class Snake:
             self.body.pop(-1)
             if self.head in self.body or self.head[0] < 0 or self.head[0] > 19 or self.head[1] < 0 or self.head[1] > 19:
                 return "H"
-            return
+            return 'N'
         return 'A'
     
     def turn(self, direction):
@@ -29,10 +29,18 @@ class Snake:
             return
         match direction:
             case 'N': 
+                if self.heading == 'S':
+                    return
                 self.heading = 'N'
             case 'S':
+                if self.heading == 'N':
+                    return
                 self.heading = 'S'
             case 'E':
+                if self.heading == 'W':
+                    return
                 self.heading = 'E'
             case 'W':
+                if self.heading == 'E':
+                    return
                 self.heading = 'W'

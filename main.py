@@ -21,7 +21,7 @@ class Window:
         self.update_screen()
     
     def update_screen(self):
-        for x in range(self.width):
+        """for x in range(self.width):
             for y in range(self.height):
                 color = (200, 200, 200)
                 if (x, y) in self.player.body or (x, y) == self.player.head:
@@ -29,16 +29,20 @@ class Window:
                 elif (x, y) == self.apple.apple_pos:
                     color = (200, 0, 0)
                 rect = pygame.Rect(x * self.block_size, y * self.block_size, self.block_size, self.block_size)
-                pygame.draw.rect(self.screen, color, rect, 1)
+                pygame.draw.rect(self.screen, color, rect, 1)"""
+        self.screen.fill((0, 0, 0))
+        for x in range(self.width):
+            for y in range(self.height):
+                color = (200, 200, 200)
+                if (x, y) in self.player.body or (x, y) == self.player.head:
+                    color = (0, 200, 0)
+                elif (x, y) == self.apple.apple_pos:
+                    color = (200, 0, 0)
+                rect = pygame.Rect(x * (self.block_size + 1), y * (self.block_size + 1), self.block_size, self.block_size)
+                pygame.draw.rect(self.screen, color, rect)
 
     def run(self):
         while True:
-            move_result = self.player.move(self.apple.apple_pos)
-            if move_result == "A":
-                self.apple.move_apple(self.player.body.append(self.player.head))
-            elif move_result == "H":
-                pass
-
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -52,11 +56,17 @@ class Window:
                         self.player.turn("S")
                     elif event.key == pygame.K_d or event.key == pygame.K_RIGHT:
                         self.player.turn("E")
-            
+                        move_result = self.player.move(self.apple.apple_pos)
+            move_result = self.player.move(self.apple.apple_pos)
+            if move_result == "A":
+                self.apple.move_apple(self.player.body + [self.player.head])
+            elif move_result == "H":
+                pass
+
             self.update_screen()
             pygame.display.update()
             self.clock.tick(self.fps)
 
 if __name__ == '__main__':
-    game = Window(400, 400)
+    game = Window(419, 419)
     game.run()
